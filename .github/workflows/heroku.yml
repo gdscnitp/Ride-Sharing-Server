@@ -1,0 +1,19 @@
+name: Deploy
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+    - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.0.0
+        with:
+          heroku_api_key: ${{secrets.HEROKU_ACCESS}}
+          heroku_app_name: "ride-sharing-server"
+          heroku_email: "asmit.vml.962@gmail.com"
+          usedocker: true
