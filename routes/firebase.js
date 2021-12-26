@@ -13,8 +13,10 @@ router.get("/", function (req, res, next) {
 });
 
 const sendNotification = async (req, res) => {
-  var tokens = req.tokens;
-  await admin.messaging().sendToDevice(tokens, {
+  var tokens = req.body.tokens;
+  console.log("yoooooooooooooooooooooo");
+  console.log(tokens);
+  await admin.messaging().sendToDevice(tokens ?? "abc", {
     data: {},
     notification: {
       title: "FCM Message",
@@ -27,6 +29,6 @@ const sendNotification = async (req, res) => {
 };
 
 router.post("/send", sendNotification);
-router.get("/send", sendNotification);
+// router.get("/send", sendNotification);
 
 module.exports = router;
