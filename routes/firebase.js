@@ -13,16 +13,20 @@ router.get("/", function (req, res, next) {
 });
 
 const sendNotification = async (req, res) => {
-  var uid = req.body.uid;
+  const body = req.body;
   console.log("yoooooooooooooooooooooo");
 
   var tokens = (
-    await admin.firestore().collection("users").doc(uid).get()
+    await admin.firestore().collection("users").doc(body.riderUid).get()
   ).data().tokens;
   console.log(tokens);
 
   await admin.messaging().sendToDevice(tokens, {
-    data: {},
+    data: {
+      tripId: body.tripId,
+      riderUid: body.riderUid,
+      driverUid: body.driverUid,
+    },
     notification: {
       title: "FCM Message",
       body: "This is an FCM notification message!",
