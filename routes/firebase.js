@@ -87,6 +87,8 @@ const sendChatNotification = async (req, res) => {
   res.send("Notification Sent");
 };
 
+
+
 router.post("/send-req-to-rider", sendNotificationToRider);
 router.post("/send-req-to-driver", sendNotificationToDriver);
 router.post("/send-chat-notification", sendChatNotification);
